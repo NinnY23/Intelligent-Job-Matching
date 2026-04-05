@@ -4,9 +4,14 @@ import { BrowserRouter as Router, Routes, Route, Navigate, useNavigate } from 'r
 import JobMatch from './JobMatch';
 import CreateJobPost from './CreateJobPost';
 import Profile from './Profile';
+import ResumeExtractionDemo from './ResumeExtractionDemo';
+import JobDescriptionExtractionDemo from './JobDescriptionExtractionDemo';
+import SkillAdmin from './SkillAdmin';
+import CompatibilityCompare from './CompatibilityCompare';
 import Login from './Login';
 import SignUp from './SignUp';
 import ForgotPassword from './ForgotPassword';
+import { getProfile, tryDevBootstrapLogin } from './api';
 import './App.css';
 
 function Header({ user, currentPage, onLogout, navigate }) {
@@ -32,6 +37,30 @@ function Header({ user, currentPage, onLogout, navigate }) {
         >
           Profile
         </button>
+        <button
+          className={`nav-link ${currentPage === 'resume-demo' ? 'active' : ''}`}
+          onClick={() => navigate('/resume-demo')}
+        >
+          Test Demo
+        </button>
+        <button
+          className={`nav-link ${currentPage === 'job-pdf-demo' ? 'active' : ''}`}
+          onClick={() => navigate('/job-pdf-demo')}
+        >
+          Job PDF Demo
+        </button>
+        <button
+          className={`nav-link ${currentPage === 'skills-admin' ? 'active' : ''}`}
+          onClick={() => navigate('/skills-admin')}
+        >
+          Skills / jobs
+        </button>
+        <button
+          className={`nav-link ${currentPage === 'compare-extractions' ? 'active' : ''}`}
+          onClick={() => navigate('/compare-extractions')}
+        >
+          Compare extractions
+        </button>
       </div>
       <div className="user-info">
         <span>Welcome, {user.name || user.email}</span>
@@ -47,21 +76,47 @@ function AppContent() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Check if user is already logged in
-    const token = localStorage.getItem('token');
-    const savedUser = localStorage.getItem('user');
-    
-    if (token && savedUser) {
+    let cancelled = false;
+    const run = async () => {
+      const token = localStorage.getItem('token');
+      const savedUser = localStorage.getItem('user');
+      if (!token || !savedUser) {
+        if (!cancelled) setLoading(false);
+        return;
+      }
+      let parsed;
       try {
-        setUser(JSON.parse(savedUser));
-      } catch (err) {
-        console.error('Error parsing saved user:', err);
+        parsed = JSON.parse(savedUser);
+      } catch {
         localStorage.removeItem('token');
         localStorage.removeItem('user');
+        if (!cancelled) setLoading(false);
+        return;
       }
-    }
-    
-    setLoading(false);
+      try {
+        const profile = await getProfile();
+        if (cancelled) return;
+        const u = profile.user || parsed;
+        setUser(u);
+        localStorage.setItem('user', JSON.stringify(u));
+      } catch {
+        const recovered = await tryDevBootstrapLogin();
+        if (cancelled) return;
+        if (recovered?.user) {
+          setUser(recovered.user);
+        } else {
+          localStorage.removeItem('token');
+          localStorage.removeItem('user');
+          setUser(null);
+        }
+      } finally {
+        if (!cancelled) setLoading(false);
+      }
+    };
+    run();
+    return () => {
+      cancelled = true;
+    };
   }, []);
 
   const handleLoginSuccess = (userData) => {
@@ -121,6 +176,30 @@ function AppContent() {
           <>
             <Header user={user} currentPage="profile" onLogout={handleLogout} navigate={navigate} />
             <Profile user={user} onUpdateProfile={handleUpdateProfile} onBack={() => navigate('/jobs')} />
+          </>
+        } />
+        <Route path="/resume-demo" element={
+          <>
+            <Header user={user} currentPage="resume-demo" onLogout={handleLogout} navigate={navigate} />
+            <ResumeExtractionDemo />
+          </>
+        } />
+        <Route path="/job-pdf-demo" element={
+          <>
+            <Header user={user} currentPage="job-pdf-demo" onLogout={handleLogout} navigate={navigate} />
+            <JobDescriptionExtractionDemo />
+          </>
+        } />
+        <Route path="/skills-admin" element={
+          <>
+            <Header user={user} currentPage="skills-admin" onLogout={handleLogout} navigate={navigate} />
+            <SkillAdmin />
+          </>
+        } />
+        <Route path="/compare-extractions" element={
+          <>
+            <Header user={user} currentPage="compare-extractions" onLogout={handleLogout} navigate={navigate} />
+            <CompatibilityCompare />
           </>
         } />
         <Route path="*" element={<Navigate to="/jobs" replace />} />

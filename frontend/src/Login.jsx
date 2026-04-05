@@ -1,5 +1,6 @@
 // src/Login.jsx
 import React, { useState } from 'react';
+import { loginUser, DEV_BOOTSTRAP_EMAIL } from './api';
 import './Login.css';
 
 export default function Login({ onLoginSuccess, onSwitchToSignUp, onSwitchToForgotPassword }) {
@@ -14,29 +15,7 @@ export default function Login({ onLoginSuccess, onSwitchToSignUp, onSwitchToForg
     setLoading(true);
 
     try {
-      const response = await fetch('http://localhost:5000/api/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ email, password }),
-      });
-
-      if (!response.ok) {
-        const contentType = response.headers.get('content-type');
-        let errorMessage = 'Invalid email or password';
-        
-        if (contentType && contentType.includes('application/json')) {
-          const data = await response.json();
-          errorMessage = data.message || errorMessage;
-        } else {
-          errorMessage = `Server error: ${response.status} ${response.statusText}`;
-        }
-        
-        throw new Error(errorMessage);
-      }
-
-      const data = await response.json();
+      const data = await loginUser(email, password);
       localStorage.setItem('token', data.token);
       localStorage.setItem('user', JSON.stringify(data.user));
       onLoginSuccess(data.user);
@@ -88,6 +67,11 @@ export default function Login({ onLoginSuccess, onSwitchToSignUp, onSwitchToForg
         <div className="login-footer">
           <p>Don't have an account? <a href="#signup" onClick={onSwitchToSignUp}>Sign up</a></p>
           <p><a href="#forgot" onClick={onSwitchToForgotPassword}>Forgot password?</a></p>
+          {process.env.NODE_ENV === 'development' && (
+            <p className="login-dev-hint">
+              Dev default account: <code>{DEV_BOOTSTRAP_EMAIL}</code> / <code>dev</code>
+            </p>
+          )}
         </div>
       </div>
     </div>

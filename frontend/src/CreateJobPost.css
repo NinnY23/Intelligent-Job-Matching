@@ -84,7 +84,7 @@
   border: 1px solid #ddd;
   border-radius: 5px;
   font-size: 14px;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   transition: border-color 0.3s ease;
 }
 
@@ -98,7 +98,7 @@
 
 .form-group textarea {
   resize: vertical;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .form-group select {

@@ -1,6 +1,7 @@
 // src/Profile.jsx
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import './Profile.css';
+import { extractResumePreview } from './api';
 
 export default function Profile({ user, onUpdateProfile, onBack }) {
   const [formData, setFormData] = useState({
@@ -17,6 +18,10 @@ export default function Profile({ user, onUpdateProfile, onBack }) {
   const [success, setSuccess] = useState('');
   const [loading, setLoading] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
+  const [resumeFile, setResumeFile] = useState(null);
+  const [extracting, setExtracting] = useState(false);
+  const [extractError, setExtractError] = useState('');
+  const [extractionPreview, setExtractionPreview] = useState(null);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -57,6 +62,27 @@ export default function Profile({ user, onUpdateProfile, onBack }) {
       setError(err.message || 'Failed to update profile. Please try again.');
     } finally {
       setLoading(false);
+    }
+  };
+
+  const handleResumeExtract = async (e) => {
+    e.preventDefault();
+    setExtractError('');
+    setExtractionPreview(null);
+
+    if (!resumeFile) {
+      setExtractError('Please select a PDF resume first.');
+      return;
+    }
+
+    setExtracting(true);
+    try {
+      const result = await extractResumePreview(resumeFile);
+      setExtractionPreview(result);
+    } catch (err) {
+      setExtractError(err.message || 'Failed to extract resume preview.');
+    } finally {
+      setExtracting(false);
     }
   };
 
@@ -200,6 +226,71 @@ export default function Profile({ user, onUpdateProfile, onBack }) {
               <span className="label">Skills:</span>
               <span className="value">{formData.skills || 'Not set'}</span>
             </div>
+          </div>
+        )}
+      </div>
+
+      <div className="profile-content resume-extraction">
+        <h2>Resume Vision Extraction (Preview)</h2>
+        <p className="resume-hint">
+          Upload a PDF to preview extracted skills, achievements, and standard test scores.
+        </p>
+
+        <form onSubmit={handleResumeExtract} className="resume-form">
+          <input
+            type="file"
+            accept="application/pdf"
+            onChange={(e) => setResumeFile(e.target.files?.[0] || null)}
+          />
+          <button type="submit" className="save-btn" disabled={extracting}>
+            {extracting ? 'Extracting...' : 'Extract Preview'}
+          </button>
+        </form>
+
+        {extractError && <div className="error-message">{extractError}</div>}
+
+        {extractionPreview && (
+          <div className="extraction-preview">
+            <div className="profile-item">
+              <span className="label">Provider:</span>
+              <span className="value">
+                {extractionPreview.provider} ({extractionPreview.model})
+              </span>
+            </div>
+
+            <div className="preview-section">
+              <h3>Skills</h3>
+              <ul>
+                {(extractionPreview.extraction?.skills || []).map((item, index) => (
+                  <li key={`skill-${index}`}>{item}</li>
+                ))}
+              </ul>
+            </div>
+
+            <div className="preview-section">
+              <h3>Achievements</h3>
+              <ul>
+                {(extractionPreview.extraction?.achievements || []).map((item, index) => (
+                  <li key={`achievement-${index}`}>{item}</li>
+                ))}
+              </ul>
+            </div>
+
+            <div className="preview-section">
+              <h3>Standard Test Scores</h3>
+              <ul>
+                {(extractionPreview.extraction?.standardTestScores || []).map((item, index) => (
+                  <li key={`score-${index}`}>
+                    {item.testName || 'Unknown Test'} | Score: {item.score || 'N/A'} | Grade: {item.grade || 'N/A'} | Source: {item.sourceText || 'N/A'}
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <details>
+              <summary>Raw JSON</summary>
+              <pre>{JSON.stringify(extractionPreview, null, 2)}</pre>
+            </details>
           </div>
         )}
       </div>

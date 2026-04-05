@@ -1,0 +1,544 @@
+.skill-admin-wrap {
+  min-height: calc(100vh - 80px);
+  background: #f5f5f5;
+  padding: clamp(16px, 3vw, 32px) clamp(12px, 2vw, 24px);
+  max-width: min(100%, 960px);
+  margin: 0 auto;
+}
+
+.skill-admin-slug-help {
+  background: #f0f4ff;
+  border: 1px solid #c5cae9;
+  border-radius: 10px;
+  padding: clamp(12px, 2vw, 16px) clamp(14px, 2.5vw, 18px);
+  margin-bottom: clamp(16px, 2.5vw, 22px);
+  font-size: clamp(0.8125rem, 1.35vw, 0.9rem);
+  line-height: 1.55;
+  color: #333;
+}
+
+.skill-admin-slug-help-title {
+  margin: 0 0 clamp(6px, 1vw, 8px) 0;
+  font-size: clamp(0.9375rem, 1.5vw, 1.05rem);
+  color: #1a237e;
+}
+
+.skill-admin-slug-help p {
+  margin: 0;
+}
+
+.skill-admin-header {
+  margin-bottom: clamp(16px, 2.5vw, 24px);
+}
+
+.skill-admin-header h2 {
+  margin: 0 0 clamp(6px, 1vw, 10px) 0;
+  font-size: clamp(1.25rem, 2.2vw, 1.6rem);
+  color: #222;
+}
+
+.skill-admin-lead {
+  color: #555;
+  font-size: clamp(0.875rem, 1.4vw, 0.95rem);
+  line-height: 1.5;
+  margin: 0 0 clamp(12px, 2vw, 16px) 0;
+}
+
+.skill-admin-seed {
+  padding: clamp(8px, 1.2vw, 10px) clamp(14px, 2vw, 18px);
+  border-radius: 8px;
+  border: 1px solid #764ba2;
+  background: white;
+  color: #5a3d8a;
+  font-weight: 700;
+  cursor: pointer;
+  font-size: clamp(0.8125rem, 1.3vw, 0.875rem);
+}
+
+.skill-admin-seed:hover {
+  background: #f8f5fc;
+}
+
+.skill-admin-error {
+  background: #fee;
+  color: #a33;
+  padding: clamp(10px, 1.5vw, 12px);
+  border-radius: 8px;
+  margin-bottom: clamp(12px, 2vw, 16px);
+  border-left: 4px solid #c33;
+}
+
+.skill-admin-notice {
+  background: #e8f5e9;
+  color: #2e7d32;
+  padding: clamp(10px, 1.5vw, 12px);
+  border-radius: 8px;
+  margin-bottom: clamp(12px, 2vw, 16px);
+}
+
+.skill-admin-card {
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+  padding: clamp(16px, 2.5vw, 22px);
+  margin-bottom: clamp(16px, 2.5vw, 22px);
+}
+
+.skill-admin-card h3 {
+  margin: 0 0 clamp(12px, 2vw, 16px) 0;
+  font-size: clamp(1rem, 1.6vw, 1.15rem);
+  color: #333;
+}
+
+.skill-admin-hint {
+  font-size: clamp(0.8125rem, 1.3vw, 0.875rem);
+  color: #666;
+  margin: 0 0 clamp(12px, 2vw, 14px) 0;
+}
+
+.skill-admin-form {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(12px, 2vw, 14px);
+}
+
+.skill-admin-form-inline {
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: flex-end;
+}
+
+.skill-admin-form label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-weight: 600;
+  font-size: clamp(0.8125rem, 1.3vw, 0.875rem);
+  color: #444;
+  min-width: min(100%, 200px);
+  flex: 1;
+}
+
+.skill-admin-field-group {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(6px, 1vw, 8px);
+}
+
+.skill-admin-field-label {
+  font-weight: 600;
+  font-size: clamp(0.8125rem, 1.3vw, 0.875rem);
+  color: #444;
+}
+
+.skill-admin-sublabel {
+  margin: 0;
+  font-size: clamp(0.75rem, 1.2vw, 0.8125rem);
+  font-weight: 500;
+  color: #666;
+  line-height: 1.45;
+}
+
+.skill-admin-chip-list {
+  list-style: none;
+  margin: 0 0 clamp(6px, 1vw, 8px) 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: clamp(6px, 1vw, 8px);
+}
+
+.skill-admin-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: clamp(4px, 0.8vw, 6px);
+  padding: clamp(4px, 0.8vw, 6px) clamp(8px, 1.2vw, 10px);
+  background: #e8eaf6;
+  border-radius: clamp(6px, 1vw, 8px);
+  font-size: clamp(0.8125rem, 1.3vw, 0.875rem);
+  color: #333;
+}
+
+.skill-admin-chip-remove {
+  border: none;
+  background: transparent;
+  color: #5c6bc0;
+  cursor: pointer;
+  font-size: clamp(1rem, 1.5vw, 1.125rem);
+  line-height: 1;
+  padding: 0 2px;
+  border-radius: 4px;
+}
+
+.skill-admin-chip-remove:hover {
+  background: rgba(0, 0, 0, 0.06);
+  color: #c62828;
+}
+
+.skill-admin-form input,
+.skill-admin-form select {
+  padding: clamp(8px, 1.2vw, 10px);
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: clamp(0.875rem, 1.4vw, 0.9375rem);
+}
+
+.skill-admin-combobox {
+  position: relative;
+  width: min(100%, 560px);
+}
+
+.skill-admin-combobox-input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: clamp(8px, 1.2vw, 10px);
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: clamp(0.875rem, 1.4vw, 0.9375rem);
+}
+
+.skill-admin-combobox-list {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 100%;
+  margin: clamp(2px, 0.4vw, 4px) 0 0 0;
+  padding: clamp(4px, 0.8vw, 6px) 0;
+  list-style: none;
+  max-height: min(50vh, 280px);
+  overflow-y: auto;
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  box-shadow: 0 clamp(4px, 1vw, 8px) clamp(12px, 2vw, 20px) rgba(0, 0, 0, 0.12);
+  z-index: 20;
+}
+
+.skill-admin-combobox-option {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: clamp(6px, 1vw, 10px);
+  padding: clamp(6px, 1vw, 8px) clamp(10px, 1.5vw, 12px);
+  cursor: pointer;
+  font-size: clamp(0.8125rem, 1.3vw, 0.875rem);
+}
+
+.skill-admin-combobox-option:hover,
+.skill-admin-combobox-option:focus-within {
+  background: #f0f4ff;
+}
+
+.skill-admin-combobox-option-primary {
+  font-weight: 600;
+  color: #333;
+}
+
+.skill-admin-combobox-option-slug {
+  font-size: clamp(0.75rem, 1.1vw, 0.8125rem);
+  color: #666;
+  background: #f5f5f5;
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+.skill-admin-combobox-empty {
+  padding: clamp(8px, 1.2vw, 10px) clamp(10px, 1.5vw, 12px);
+  color: #888;
+  font-size: clamp(0.8125rem, 1.3vw, 0.875rem);
+  font-style: italic;
+}
+
+.skill-admin-edit-row .skill-admin-combobox {
+  flex: 1;
+  min-width: min(100%, 200px);
+  max-width: min(100%, 320px);
+}
+
+.skill-admin-primary {
+  align-self: flex-start;
+  padding: clamp(10px, 1.5vw, 12px) clamp(18px, 2.5vw, 22px);
+  border: none;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  font-weight: 700;
+  cursor: pointer;
+  font-size: clamp(0.875rem, 1.4vw, 0.9375rem);
+}
+
+.skill-admin-primary:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.skill-admin-table-wrap {
+  overflow-x: auto;
+}
+
+.skill-admin-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: clamp(0.8125rem, 1.3vw, 0.875rem);
+}
+
+.skill-admin-table th,
+.skill-admin-table td {
+  text-align: left;
+  padding: clamp(8px, 1.2vw, 10px);
+  border-bottom: 1px solid #eee;
+}
+
+.skill-admin-table th {
+  color: #555;
+  font-weight: 700;
+}
+
+.skill-admin-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.skill-admin-small {
+  padding: 6px 10px;
+  font-size: 0.8125rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  background: #fafafa;
+  cursor: pointer;
+}
+
+.skill-admin-danger {
+  padding: 6px 10px;
+  font-size: 0.8125rem;
+  border-radius: 6px;
+  border: 1px solid #e57373;
+  background: #ffebee;
+  color: #c62828;
+  cursor: pointer;
+}
+
+.skill-admin-edit-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+}
+
+.skill-admin-edit-row select {
+  max-width: min(100%, 220px);
+  padding: 6px;
+}
+
+.skill-admin-empty {
+  color: #888;
+  font-size: 0.875rem;
+  margin: clamp(8px, 1.5vw, 12px) 0 0 0;
+}
+
+.skill-admin-alias-list {
+  list-style: none;
+  padding: 0;
+  margin: clamp(12px, 2vw, 16px) 0 0 0;
+}
+
+.skill-admin-alias-list li {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: clamp(8px, 1.5vw, 12px);
+  padding: clamp(8px, 1.2vw, 10px) 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.skill-admin-alias-arrow {
+  color: #888;
+}
+
+.skill-admin-sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.skill-admin-truncate-cell {
+  cursor: help;
+  border-bottom: 1px dotted #ccc;
+}
+
+.skill-admin-hierarchy-empty {
+  color: #888;
+  font-style: italic;
+}
+
+.skill-admin-hierarchy-expand-row td {
+  padding: 0;
+  vertical-align: top;
+}
+
+.skill-admin-hierarchy-expand {
+  background: #f8f9ff;
+  padding: clamp(10px, 2vw, 14px) clamp(12px, 2vw, 16px);
+  border-top: 1px solid #e8eaf6;
+}
+
+.skill-admin-hierarchy-expand-inner {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(12px, 2vw, 16px);
+}
+
+.skill-admin-hierarchy-current {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, max(200px, 45%)), 1fr));
+  gap: clamp(12px, 2vw, 18px);
+}
+
+.skill-admin-mini-label {
+  display: block;
+  font-size: clamp(0.6875rem, 1.1vw, 0.75rem);
+  font-weight: 700;
+  color: #555;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-bottom: clamp(6px, 1vw, 8px);
+}
+
+.skill-admin-mini-chip-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: clamp(6px, 1vw, 8px);
+}
+
+.skill-admin-mini-chip-list .skill-admin-hierarchy-empty {
+  list-style: none;
+  font-size: clamp(0.8125rem, 1.3vw, 0.875rem);
+}
+
+.skill-admin-mini-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: clamp(4px, 0.8vw, 6px);
+  padding: clamp(4px, 0.8vw, 6px) clamp(8px, 1.2vw, 10px);
+  background: #e8eaf6;
+  border-radius: clamp(6px, 1vw, 8px);
+  font-size: clamp(0.8125rem, 1.3vw, 0.875rem);
+  color: #333;
+}
+
+.skill-admin-mini-chip-remove {
+  border: none;
+  background: transparent;
+  color: #5c6bc0;
+  cursor: pointer;
+  font-size: clamp(1rem, 1.5vw, 1.125rem);
+  line-height: 1;
+  padding: 0 2px;
+  border-radius: 4px;
+}
+
+.skill-admin-mini-chip-remove:hover {
+  color: #c62828;
+  background: rgba(0, 0, 0, 0.06);
+}
+
+.skill-admin-hierarchy-add-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: clamp(8px, 1.5vw, 12px);
+  padding-top: clamp(4px, 1vw, 6px);
+  border-top: 1px solid #e0e4f5;
+}
+
+.skill-admin-relation-label {
+  margin: 0;
+  flex: 0 0 auto;
+}
+
+.skill-admin-relation-select {
+  padding: clamp(8px, 1.2vw, 10px);
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: clamp(0.8125rem, 1.3vw, 0.875rem);
+  min-width: min(100%, clamp(260px, 40vw, 320px));
+  max-width: min(100%, 400px);
+  background: #fff;
+}
+
+.skill-admin-hierarchy-add-row .skill-admin-combobox {
+  flex: 1 1 min(200px, 100%);
+  min-width: min(100%, 200px);
+  max-width: min(100%, 420px);
+}
+
+.skill-admin-hierarchy-add-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: clamp(6px, 1vw, 8px);
+  align-items: center;
+}
+
+.skill-admin-page-kind {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: clamp(10px, 2vw, 16px);
+  margin-bottom: clamp(10px, 2vw, 14px);
+}
+
+.skill-admin-page-kind-label {
+  font-size: clamp(0.8125rem, 1.35vw, 0.9rem);
+  font-weight: 700;
+  color: #444;
+}
+
+.skill-admin-kind-toggle {
+  display: inline-flex;
+  border-radius: clamp(8px, 1.5vw, 10px);
+  overflow: hidden;
+  border: 1px solid #c5cae9;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+}
+
+.skill-admin-kind-toggle button {
+  padding: clamp(8px, 1.5vw, 10px) clamp(14px, 2.5vw, 20px);
+  font-size: clamp(0.8125rem, 1.35vw, 0.9rem);
+  font-weight: 600;
+  border: none;
+  background: #fff;
+  color: #5c6bc0;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.skill-admin-kind-toggle button + button {
+  border-left: 1px solid #c5cae9;
+}
+
+.skill-admin-kind-toggle button.is-active {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: #fff;
+}
+
+.skill-admin-kind-toggle button:not(.is-active):hover {
+  background: #f3f4ff;
+}
+
+.skill-admin-kind-select {
+  padding: clamp(4px, 1vw, 6px) clamp(6px, 1.2vw, 8px);
+  font-size: clamp(0.75rem, 1.25vw, 0.85rem);
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  max-width: min(100%, clamp(100px, 18vw, 140px));
+}

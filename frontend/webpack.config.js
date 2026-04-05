@@ -34,6 +34,8 @@ module.exports = {
     static: path.join(__dirname, 'dist'),
     compress: true,
     port: 3000,
-    open: true
+    open: true,
+    // So /skills-admin and other client routes load index.html instead of 404
+    historyApiFallback: true,
   }
 };
